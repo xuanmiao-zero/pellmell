@@ -43,14 +43,6 @@ export default class extends Component {
   }
 
   componentWillReceiveProps() {
-    /*let {strokeDashoffset} = this.state
-    let {index} = this.props
-    this.setState({
-      preStrokeDashoffset: strokeDashoffset,
-      preIndex: index
-    })
-    console.log(index, strokeDashoffset)*/
-
 //开始画圈圈
     this.ATween(295.416, -295.416, this.props.intervalTime, 'linear', ()=> {
       //先将上一次的未走完的圆圈回归到零在进行下一次的动画
@@ -78,7 +70,7 @@ export default class extends Component {
       }
       SwiperProgressBarsItemArray[i] = (
         <li className="swiper-progressbars-circle"
-            key={+new Date() + String(Math.random()).slice(2)}
+            key={i}
         >
         <svg viewBox="0 0 100 100" style={{display: 'block'}}>
           <path d="M 50,50 m 0,-47 a 47,47 0 1 1 0,94 a 47,47 0 1 1 0,-94"

@@ -1,8 +1,6 @@
 import SwiperWrapper from "./SwiperWrapper";
 import SwiperProgressBars from "./SwiperProgressBars";
 import SwiperPagination from "./SwiperPagination";
-//引入数据
-import carouselData from "./data/carouselData";
 
 export default class Carousel extends Component {
   constructor(props) {
@@ -11,6 +9,7 @@ export default class Carousel extends Component {
       index: 1,
       switchTime: this.props.switchTime,
       intervalTime: this.props.intervalTime,
+      preIndex: 0
     }
   }
 
@@ -29,6 +28,7 @@ export default class Carousel extends Component {
 
   //修改轮播图序号
   modifyCarouselIndex=(index)=>{
+    let {carouselData} = this.props
     this.setState({
       index: ++index > carouselData.length + 1? 1:index ,   //当到最后一张时，回到第二张
     })
@@ -58,12 +58,21 @@ export default class Carousel extends Component {
     this.propsToState(nextProps)
   }
 
-  componentDidUpdate(){ //prevProps指的是什么？
+  componentDidUpdate(prevProps, prevState){ //prevProps指的是什么？
     this.judgeIndex()
+    if (prevState.index !== this.state.index) {
+      let index1 = this.indexSwitch(this.state.index)
+      let {isColorReversed} = this.props.carouselData[index1]
+      //修改父级组件state的sColorReversed
+      this.props.setIsColorReversed(isColorReversed)
+      return true;
+    }
+    return false;
   }
 
   //判断图片轮播是否到达边界并处理
   judgeIndex =() => {
+    let {carouselData} = this.props
     if(this.state.index === carouselData.length + 1){
       this.setState({
         index: 0,
@@ -78,6 +87,7 @@ export default class Carousel extends Component {
   }
 
   indexSwitch=(index) =>{
+    let {carouselData} = this.props
     // let index1 = index - 1 >= carouselData.length ? 1: index - 1
     // index1 = index1 === -1 ? carouselData.length: index1
     let index1 = 0;
@@ -99,11 +109,12 @@ export default class Carousel extends Component {
       carouselStart,
       carouselEnd
     } = this
-    console.log('第'+index + '张')
+    let {carouselData} = this.props
+
     let index1 = indexSwitch(index)
     let {isColorReversed} = carouselData[index1]
-    //判断是否颜色反转
     let color = isColorReversed?'is-colorreversed':''
+
     return (
       <div className="page-body" id="main-content">
         <div className={`page-container page-home page--fullscreen ${color}`} data-pm-pageid="page-home"

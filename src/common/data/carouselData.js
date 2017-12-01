@@ -1,7 +1,7 @@
 export default [
   {
     id: "0",
-    src: require("../img/andre_beato_yes.jpg"),
+    src: require("../img/carousel/andre_beato_yes.jpg"),
     name: "ANDRE BEATO",
     href: 'www.xuanmiao.wang',
     type: 'artist',
@@ -10,7 +10,7 @@ export default [
   },
   {
     id: "1",
-    src: require("../img/athom_studios_playdoh.jpg"),
+    src: require("../img/carousel/athom_studios_playdoh.jpg"),
     name: "ATHOM PLAYOH",
     href: 'www.xuanmiao.wang',
     type: 'artist',
@@ -19,7 +19,7 @@ export default [
   },
   {
     id: "2",
-    src: require("../img/benoit_challand_penorchestra_02.jpg"),
+    src: require("../img/carousel/benoit_challand_penorchestra_02.jpg"),
     name: "BENOIT CHALLAND PENORCHESTRA",
     href: 'www.xuanmiao.wang',
     type: 'artist',
@@ -28,7 +28,7 @@ export default [
   },
   {
     id: "3",
-    src: require("../img/cream_earth_hour.jpg"),
+    src: require("../img/carousel/cream_earth_hour.jpg"),
     name: "CREAM EARTH",
     href: 'www.xuanmiao.wang',
     type: 'artist',
@@ -37,7 +37,7 @@ export default [
   },
   {
     id: "4",
-    src: require("../img/emmanuelle_julien_airballon.jpg"),
+    src: require("../img/carousel/emmanuelle_julien_airballon.jpg"),
     name: "IMGEMMANUELLE JULIEN AIREBALLON",
     href: 'www.xuanmiao.wang',
     type: 'artist',
@@ -46,7 +46,7 @@ export default [
   },
   {
     id: "5",
-    src: require("../img/mark_gmehling_anyone1.jpg"),
+    src: require("../img/carousel/mark_gmehling_anyone1.jpg"),
     name: "GMEHLING ANYONE",
     href: 'www.xuanmiao.wang',
     type: 'artist',
@@ -55,7 +55,7 @@ export default [
   },
   {
     id: "6",
-    src: require("../img/pell_mell_agency_machineast_nike_airmax4.jpg"),
+    src: require("../img/carousel/pell_mell_agency_machineast_nike_airmax4.jpg"),
     name: "MACHINEAST NIKE",
     href: 'www.xuanmiao.wang',
     type: 'artist',
@@ -64,7 +64,7 @@ export default [
   },
   {
     id: "7",
-    src: require("../img/pell_mell_agency_platinum_planet_floads.jpg"),
+    src: require("../img/carousel/pell_mell_agency_platinum_planet_floads.jpg"),
     name: "PLATINUM PLANET",
     href: 'www.xuanmiao.wang',
     type: 'artist',
@@ -73,7 +73,7 @@ export default [
   },
   {
     id: "8",
-    src: require("../img/pell_mell_agency_recom_farmhouse_siob_escalator.jpg"),
+    src: require("../img/carousel/pell_mell_agency_recom_farmhouse_siob_escalator.jpg"),
     name: "RECOM FARMHOUSE",
     href: 'www.xuanmiao.wang',
     type: 'artist',
@@ -82,7 +82,7 @@ export default [
   },
   {
     id: "9",
-    src: require("../img/pell_mell_agency_santi_zoraidez_bulgari_06.jpg"),
+    src: require("../img/carousel/pell_mell_agency_santi_zoraidez_bulgari_06.jpg"),
     name: "SANTI ZORAIDEZ",
     href: 'www.xuanmiao.wang',
     type: 'artist',
@@ -91,7 +91,7 @@ export default [
   },
   {
     id: "10",
-    src: require("../img/pell_mell_agency_simon_danaher_arthur_hand1.jpg"),
+    src: require("../img/carousel/pell_mell_agency_simon_danaher_arthur_hand1.jpg"),
     name: "SIMON DANAHER",
     href: 'www.xuanmiao.wang',
     type: 'artist',
@@ -100,7 +100,7 @@ export default [
   },
   {
     id: "11",
-    src: require("../img/pellmellagency_foreal_selfinitiated_tropical_blast_2.jpg"),
+    src: require("../img/carousel/pellmellagency_foreal_selfinitiated_tropical_blast_2.jpg"),
     name: "FOREAL SELFINITIATED",
     href: 'www.xuanmiao.wang',
     type: 'artist',

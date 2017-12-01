@@ -20,30 +20,40 @@ export default class SwiperWrapper extends Component {
     this.propsToState(nextProps)  //React子组件渲染问题，比预期晚一次, 如何解决？使用nextProps。  因为setState为什么不会同步更新组件状态，直到render函数被调用的时候，this.state才得到更新。
   }
 
+  componentDidMount() {
+    window.addEventListener('resize', this.onWindowResize)
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onWindowResize)
+  }
+  onWindowResize = () =>{
+    this.setState({})
+  }
+
   render() {
     let {carouselData} = this.props
     let {switchTime, index} = this.state
 
-    let translate3dX = index * document.body.clientWidth;
-    //style 切换动画
+    let translate3dX = index *  window.screen.width;
+      //style 切换动画
     const ulStyle = {
       transform: `translate3d(-${translate3dX}px, 0px, 0px)`,
       transitionDuration: `${switchTime}ms`
     }
     //首尾各增加一条数据用于轮播
     let dataImgInfoArray = [
-      {index: carouselData.length - 1, ...carouselData[carouselData.length - 1]},
+      {index: -1, ...carouselData[carouselData.length - 1]},
         ...carouselData.map((e, i) => {
         return {index: i, ...e}
       }),
-      {index: 0, ...carouselData[0]}
+      {index: carouselData.length , ...carouselData[0]}
     ]
 
     return (
       <ul className="swiper-wrapper" style={ulStyle}>
         {
           dataImgInfoArray.map(e => {
-            return <SwiperPaginationItem key={+new Date() + String(Math.random()).slice(2)} dataImgInfo={e}/>
+            return <SwiperPaginationItem key={e.index} dataImgInfo={e}/>
           })
         }
       </ul>
