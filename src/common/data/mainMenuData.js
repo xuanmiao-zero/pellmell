@@ -85,21 +85,21 @@ export default [
   }
 ];
 
-export var mainMenuNavData = [
+export let mainMenuNavData = [
   {
-    id: '1',
+    id: '0',
     name: 'Artists'
   },
   {
-    id: '2',
+    id: '1',
     name: 'CATEGORIES'
   },
   {
-    id: '3',
+    id: '2',
     name: 'FOLLOW US'
   },
   {
-    id: '4',
+    id: '3',
     name: 'Contact Us'
   },
 ]

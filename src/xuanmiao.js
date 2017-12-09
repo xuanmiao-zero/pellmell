@@ -45,7 +45,7 @@ class XuanMiao extends Component {
     let {isColorReversed, isOpen} = this.state
     return (
       <div>
-         <Svg/>
+        <Svg/>
         <MainHeader {...{
           isColorReversed,
           setIsOpen,
