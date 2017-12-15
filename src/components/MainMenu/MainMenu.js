@@ -1,7 +1,9 @@
 import {Tween} from "../../common/js/function_collection"
 import NavigationBackgroundsItem from "./NavigationBackgroundsItem"
 import NavigationScroller from "./NavigationScroller"
+
 import QueueAnim from 'rc-queue-anim';
+import BannerAnim, {Element} from 'rc-banner-anim';
 
 export default class extends Component {
   constructor(props) {
@@ -37,6 +39,7 @@ export default class extends Component {
     return !_.isEqual(this.props, nextProps) || !_.isEqual(this.state, nextState) //只有当props或者state有变化才更新组件
   }
 
+
   ATween = (attribute, begin, count, duration, fx, fn) => {
     clearInterval(this.timerID)
     let startTime = new Date().getTime()//运动前的时间
@@ -67,7 +70,7 @@ export default class extends Component {
 
   //关闭菜单动画
   closeAnimate = () => {
-    this.ATween('menuSwitchOpacity', 1, -1, 500, 'linear',()=>{
+    this.ATween('menuSwitchOpacity', 1, -1, 500, 'linear', () => {
       this.setState({
         isOpen: false
       })
@@ -89,6 +92,13 @@ export default class extends Component {
     this.ATween('menuSwitchOpacity', 0, 1, 500, 'linear',)
   }
 
+  //修改活跃的一级标题
+  changeNavigationLinkLevel0IsActive = (index) => {
+    this.setState({
+      navigationLinkLevel0IsActive: index
+    })
+  }
+
   render() {
     let {
       menuSwitchOpacity,
@@ -97,40 +107,44 @@ export default class extends Component {
       navigationLinkLevel0IsActive,
       navigationListShow
     } = this.state
-    let {mainMenuData,mainMenuNavData} = this.props
-    let {backgroundAdaptive} = this
+    let {mainMenuData, mainMenuNavData} = this.props
+    let {
+      backgroundAdaptive,
+      changeNavigationLinkLevel0IsActive
+    } = this
     return (
-      <nav
-        id="main-menu"
-        className={`navigation${isOpen ? ' is-open' : ''}`}
-        style={{
-          opacity: menuSwitchOpacity,
-        }}
-      >
-        <ul className="navigation-backgrounds">
-          {
-            mainMenuData.map((e, index) => {
-              return <NavigationBackgroundsItem
-                key={e.id}
-                {...{
-                  NavigationBackgroundsItemIsActive,
-                  backgroundAdaptive,
-                  e,
-                  index
-                }}
-              />
-            })
-          }
-        </ul>
-        <NavigationScroller
-          {...{
-            mainMenuNavData,
-            navigationListShow,
-            navigationLinkLevel0IsActive,
-            mainMenuData
-          }}
-        />
-      </nav>
+          <nav
+            id="main-menu"
+            className={`navigation${isOpen ? ' is-open' : ''}`}
+            style={{
+              opacity: menuSwitchOpacity,
+            }}
+          >
+            <ul className="navigation-backgrounds">
+              {
+                mainMenuData.map((e, index) => {
+                  return <NavigationBackgroundsItem
+                    key={e.id}
+                    {...{
+                      NavigationBackgroundsItemIsActive,
+                      backgroundAdaptive,
+                      e,
+                      index
+                    }}
+                  />
+                })
+              }
+            </ul>
+            <NavigationScroller
+              {...{
+                mainMenuNavData,
+                navigationListShow,
+                navigationLinkLevel0IsActive,
+                mainMenuData,
+                changeNavigationLinkLevel0IsActive,
+              }}
+            />
+          </nav>
     );
   }
 }

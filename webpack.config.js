@@ -6,6 +6,11 @@ const webpack = require("webpack");
 const rv = (...a) => path.resolve(__dirname, ...a);
 
 module.exports = {
+  resolve: {
+    alias: {
+      '@': rv('./'),
+    }
+  },
   entry: "./src/xuanmiao.js",
   output: {
     path: rv("dist"),

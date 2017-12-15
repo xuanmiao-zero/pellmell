@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom'
+
 export default class MainHeader extends Component {
   constructor(props) {
     super(props);
@@ -12,17 +14,17 @@ export default class MainHeader extends Component {
         <a
           id="main-menu-toggle"
           className={`navigation-toggle u-link-underline u-font-montserrat${isOpen ? ' is-open' : ''}`}
-          href="#nav-toggle"
+          href="javascript:"
           onClick={setIsOpen}
         >
           <span className="navigation-toggle-open">menu</span>
           <span className="navigation-toggle-close">close</span>
         </a>
-        <a id="home-link" className="mainheader-logo" href="/" data-pm-nodetype="page" data-pm-nodename="home">
+        <Link id="home-link" className="mainheader-logo" to="/" data-pm-nodetype="page" data-pm-nodename="home">
           <svg className="svg-icon svg-pellmell-dims">
             <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#pellmell"></use>
           </svg>
-        </a>
+        </Link>
       </div>
     );
   }

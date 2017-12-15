@@ -135,8 +135,6 @@ export let Tween = {
         return Tween['bounceOut'](t*2-d, 0, c, d) * 0.5 + c*0.5 + b;
     }
 };
-
-
 /*
 * obj  ：  要运动的元素
 * count:  运动的总路程
@@ -147,7 +145,7 @@ export let Tween = {
 *
 * */
 
-function ATween(obj,count,duration,attr,fx,fn){
+export function ATween(obj,count,duration,attr,fx,fn){
     //清除定时器
     clearInterval(obj.timer);
     var startTime = new Date().getTime();//运动前的时间
@@ -168,8 +166,11 @@ function ATween(obj,count,duration,attr,fx,fn){
     },30);
 }
 
+
+
+
 //获取元素属性
-function getCss(obj,attr){
+export function getCss(obj,attr){
     var objAttr = getComputedStyle(obj)[attr];
     return isNaN(parseFloat(objAttr))?objAttr:parseFloat(objAttr);
 }
@@ -326,7 +327,7 @@ function getElementTop(element){
 * option.down 向下滚动触发的操作
 *
  * */
-function scroll(option){
+export function scroll(option){
     if(option.obj === null)
         option.obj = document;
     option.obj.onmousewheel = function (ev) {
@@ -341,8 +342,6 @@ function scroll(option){
             option.down&&option.down(ev);
         }
 
-        ev.preventDefault();
-        return false;
     };
 
     option.obj.addEventListener("DOMMouseScroll", function (ev) {
@@ -356,8 +355,6 @@ function scroll(option){
         if(ev.detail > 0)
             option.down&&option.down(ev);
 
-        ev.preventDefault();
-        return false;
     }, false);
 }
 
@@ -373,7 +370,6 @@ function scroll(option){
 function leapYear(year) {
     return !(year % (year % 100 ? 4 : 400));
 }
-
 
 /*
  * 清除所有cookie函数

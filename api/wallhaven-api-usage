@@ -1,0 +1,55 @@
+Install
+yarn add wallhaven-api
+Usage
+const Wallhaven = require('wallhaven-api')
+
+const api = new Wallhaven()
+
+api.search('attack on titans')
+  .then(result => {
+    console.log(result)
+    // => { totalPages: 29, images: [] }
+  })
+Micro-service
+A micro-service based on this module: https://wallhaven-api.now.sh
+
+Examples:
+
+Search: https://wallhaven-api.now.sh/search?keyword=attack on titans
+Details: https://wallhaven-api.now.sh/details/482373
+API
+api.search(keyword, [options])
+Search wallpapers by given keyword.
+
+options.categories
+Type: Array
+Default: ['general', 'anime', 'people']
+
+options.page
+Type: Number
+Default: 1
+
+options.sorting
+Type: string
+Default: relevance
+Value: one of relevance random date_added views favorites
+
+options.nsfw
+Type: boolean
+Default: false
+
+Show NSFW (not safe for work) result.
+
+options.sketchy
+Type: boolean
+Default: false
+
+Show sketchy wallpapers only.
+
+api.deatils(id)
+Get the details of a wallpaper by image id.
+
+id
+Type: Number
+
+Image ID.
