@@ -27,7 +27,7 @@ export default class extends Component {
     let SwiperPaginationItemArray = [];
     for (let i = 0; i < count; i++) {
       SwiperPaginationItemArray[i] = (
-        <a key={i} href={`#${i}`}
+        <a key={i} href='javascript:'
            className={
              classNames({
                'swiper-pagination-bullet': true,

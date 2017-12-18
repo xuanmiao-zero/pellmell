@@ -3,6 +3,10 @@ export default class extends Component {
     super(props);
   }
 
+  componentDidMount(){
+    this.props.setIsColorReversedTrue()
+  }
+
   render() {
     return (
       <div>

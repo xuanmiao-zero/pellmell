@@ -107,44 +107,45 @@ export default class extends Component {
       navigationLinkLevel0IsActive,
       navigationListShow
     } = this.state
-    let {mainMenuData, mainMenuNavData} = this.props
+    let {mainMenuData, mainMenuNavData, setIsOpen} = this.props
     let {
       backgroundAdaptive,
       changeNavigationLinkLevel0IsActive
     } = this
     return (
-          <nav
-            id="main-menu"
-            className={`navigation${isOpen ? ' is-open' : ''}`}
-            style={{
-              opacity: menuSwitchOpacity,
-            }}
-          >
-            <ul className="navigation-backgrounds">
-              {
-                mainMenuData.map((e, index) => {
-                  return <NavigationBackgroundsItem
-                    key={e.id}
-                    {...{
-                      NavigationBackgroundsItemIsActive,
-                      backgroundAdaptive,
-                      e,
-                      index
-                    }}
-                  />
-                })
-              }
-            </ul>
-            <NavigationScroller
-              {...{
-                mainMenuNavData,
-                navigationListShow,
-                navigationLinkLevel0IsActive,
-                mainMenuData,
-                changeNavigationLinkLevel0IsActive,
-              }}
-            />
-          </nav>
+      <nav
+        id="main-menu"
+        className={`navigation${isOpen ? ' is-open' : ''}`}
+        style={{
+          opacity: menuSwitchOpacity,
+        }}
+      >
+        <ul className="navigation-backgrounds">
+          {
+            mainMenuData.map((e, index) => {
+              return <NavigationBackgroundsItem
+                key={e.id}
+                {...{
+                  NavigationBackgroundsItemIsActive,
+                  backgroundAdaptive,
+                  e,
+                  index
+                }}
+              />
+            })
+          }
+        </ul>
+        <NavigationScroller
+          {...{
+            mainMenuNavData,
+            navigationListShow,
+            navigationLinkLevel0IsActive,
+            mainMenuData,
+            changeNavigationLinkLevel0IsActive,
+            setIsOpen
+          }}
+        />
+      </nav>
     );
   }
 }

@@ -16,10 +16,10 @@ export default class WaterfallFlow extends React.PureComponent {
   };
 
   runAfterImagesLoaded = () => {
-    console.log('图片全部加载完成')
+    // console.log('图片全部加载完成')
   }
   runTimeoutFunction = () => {
-    console.log('您的网络较慢，建议检查网络')
+    // console.log('您的网络较慢，建议检查网络')
   }
 
   render() {

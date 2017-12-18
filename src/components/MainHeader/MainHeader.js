@@ -6,7 +6,7 @@ export default class MainHeader extends Component {
   }
 
   render() {
-    let {isColorReversed, setIsOpen, isOpen} = this.props
+    let {isColorReversed, setIsOpen, setIsOpenFalse, isOpen} = this.props
     return (
       <div id="main-header"
            className={`mainheader${isColorReversed || isOpen ? ' is-colorreversed' : ''}`} /*为什么这样写不行？ （{'mainheader '+ isColorReversed?'is-colorreversed':''}*/
@@ -20,7 +20,11 @@ export default class MainHeader extends Component {
           <span className="navigation-toggle-open">menu</span>
           <span className="navigation-toggle-close">close</span>
         </a>
-        <Link id="home-link" className="mainheader-logo" to="/" data-pm-nodetype="page" data-pm-nodename="home">
+        <Link id="home-link"
+              className="mainheader-logo"
+              to="/" data-pm-nodetype="page"
+              onClick={setIsOpenFalse}
+        >
           <svg className="svg-icon svg-pellmell-dims">
             <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#pellmell"></use>
           </svg>

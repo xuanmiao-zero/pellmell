@@ -1,8 +1,11 @@
 //引入库
 import 'lodash'
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {HashRouter as Router, Route, Switch} from 'react-router-dom';
 import {Provider, connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+// import Pace from '@/src/common/js/react-pace-progress'
+import PreLoader from '@/src/components/PreLoader/PreLoader'
+import {AnimatedSwitch} from 'react-router-transition';
 
 //引入样式
 import './common/style/index.css';
@@ -17,12 +20,16 @@ import FollowUs from './components/FollowUs/FollowUs';
 import Contact from './components/Contact/Contact';
 import ArtWork from './components/ArtWork/ArtWork';
 import ArtistDetails from './components/ArtistDetails/ArtistDetails';
-
+import NotFound from './components/NotFound/NotFound';
 //引入数据
 import carouselData from "./common/data/carouselData";
 import mainMenuData from "./common/data/mainMenuData";
 import {mainMenuNavData} from "./common/data/mainMenuData";
+
+//redux
 import createStore from './store/configureStore';
+//引入action
+import commonAction from '@/src/actions/commonAction'
 
 //创建store, 应⽤程序中唯⼀的 Redux store 对象
 const store = createStore();
@@ -46,7 +53,8 @@ class XuanMiao extends Component {
     super(props);
     this.state = {
       isColorReversed: false,
-      isOpen: false
+      isOpen: false,
+      isPreLoaderOver: false 
     };
   }
 
@@ -56,7 +64,11 @@ class XuanMiao extends Component {
       isColorReversed: isColorReversed
     })
   }
-
+  setIsColorReversedTrue=()=>{
+    this.setState({
+      isColorReversed: true
+    })
+  }
   /*
   * 点击菜单按钮触发的操作
   * 切换IsColorReversed 状态（true false）
@@ -69,19 +81,45 @@ class XuanMiao extends Component {
     })
     //渐变MainMenu的透明度到 （1 0）
   }
-  preLoader = () => {
-    console.log('加载动画')
-  }
-  getConfirmation = () => {
-    console.log(1)
+
+  setIsOpenFalse = () => {
+    //切换IsColorReversed 状态（true false）
     this.setState({
       isOpen: false
     })
-    this.preLoader()
+    //渐变MainMenu的透明度到 （1 0）
+  }
+
+  componentWillReceiveProps(nextprops) {
+    if (nextprops.location.pathname !== this.props.location.pathname) {
+      this.props.commonAction.showPreLoading()
+      console.log('切换开始')
+      console.log(this.props.common)
+    }
+  }
+
+  componentDidMount() {
+    if (this.props.common.loading === true) {
+      this.props.commonAction.hidePreLoading()
+      console.log(this.props.common)
+    }
+    window.onload = ()=>{
+      if(document.readyState === 'complete'){
+        this.setState({
+          isPreLoaderOver: true
+        })
+      }
+      setTimeout(()=>{
+        //超过五秒不再等待
+        this.setState({
+          isPreLoaderOver: true
+        })
+      }, 4000)
+    }
   }
 
   render() {
-    let {setIsColorReversed, setIsOpen} = this
+    let {setIsColorReversed, setIsOpen, setIsOpenFalse, setIsColorReversedTrue} = this
     let {isColorReversed, isOpen} = this.state
     return (
       <div>
@@ -89,17 +127,19 @@ class XuanMiao extends Component {
         <MainHeader {...{
           isColorReversed,
           setIsOpen,
+          setIsOpenFalse,
           isOpen
         }} />
         <MainMenu
           {...{
             isOpen,
+            setIsOpen,
             mainMenuData,
             mainMenuNavData
           }}
         />
-
         <div className="page-body" id="main-content">
+            <PreLoader flag={this.state.isPreLoaderOver} />
           <Switch>
             <Route exact strict path="/" render={() => <Carousel
               {...{
@@ -108,52 +148,62 @@ class XuanMiao extends Component {
               }}
             />}/>
             <Route
+              exact
               path="/categories"
               component={Categories}
-              getUserConfirmation={() => this.getConfirmation}
-              forceRefresh={!supportsHistory}
             />
             <Route
+              exact
               path="/followus"
-              component={FollowUs}
-              getUserConfirmation={() => this.getConfirmation}
-              forceRefresh={!supportsHistory}
+              render = {()=> < FollowUs {...{setIsColorReversedTrue}} /> }
             />
             <Route
+              exact
               path="/contactus"
-              component={Contact}
-              getUserConfirmation={() => this.getConfirmation}
-              forceRefresh={!supportsHistory}
+              render = {()=> < Contact {...{setIsColorReversedTrue}} /> }
             />
             <Route
+              exact
               path="/artwork"
               component={ArtWork}
-              getUserConfirmation={() => this.getConfirmation}
-              forceRefresh={!supportsHistory}
             />
             <Route
+              exact
               path="/artistdetails"
               component={ArtistDetails}
-              getUserConfirmation={() => this.getConfirmation}
-              forceRefresh={!supportsHistory}
             />
-            <Route exact strict path='*' render={() => <h1>Page not found</h1>}/>
+            <Route path="*" component={NotFound} />
           </Switch>
         </div>
       </div>
-    );
+    )
   }
 }
 
+//连接store里的state和组件
+const mapStateToProps = state => {
+  return {
+    common: state.common
+  }
+}
+
+//连接action和组件
+const mapDispatchToProps = dispatch => ({
+  commonAction: bindActionCreators(commonAction, dispatch)
+})
+
+//连接组件和redux store
+XuanMiao = connect(mapStateToProps, mapDispatchToProps)(XuanMiao)
+
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
-      <Route
-        path='/'
-        component={XuanMiao}
-        getUserConfirmation={getConfirmation('Are you sure?', preloader)}
-        forceRefresh={!supportsHistory}
-      />
+    <Router basename='/pellmell'>
+        <Route
+          path='/'
+          component={XuanMiao}
+          getUserConfirmation={getConfirmation('Are you sure?', preloader)}
+          forceRefresh={!supportsHistory}
+        />
     </Router>
   </Provider>,
   document.getElementById('root')

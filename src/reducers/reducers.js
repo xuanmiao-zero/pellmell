@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import common from '@/src/reducers/commonReducer';
 import WaterfallFlow from './getWaterfallFlowDataReducers';
 
 /**
@@ -7,6 +8,7 @@ import WaterfallFlow from './getWaterfallFlowDataReducers';
  */
 
 const rootReducer = combineReducers({
+  common: common,
   WaterfallFlow: WaterfallFlow
 });
 export default rootReducer;

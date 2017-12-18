@@ -15,7 +15,7 @@ let initialState = {
 }
 
 export default (state = initialState, action) =>{
-  console.log('reducer called with state ', state , ' and action ', action);
+  // console.log('reducer called with state ', state , ' and action ', action);
   switch (action.type) {
     //开始获取数据
     case BEGIN_GET_WATERFALLFLOW_DATA:

@@ -7,7 +7,7 @@ let actions = {
       let state = getState()
       //若正在获取数据不重复获取
       if (state.WaterfallFlow.isFetching) {
-        console.log('重复获取')
+        // console.log('重复获取')
         return;
       }
       //页数page
@@ -16,8 +16,8 @@ let actions = {
       if(add){
         page = ++ page
       }
-      let url = 'http://localhost:3000/?keyword=' + categories + '&page=' + page
-      console.log(url)
+      let url = 'http://60.205.214.74:3000/?keyword=' + categories + '&page=' + page
+      // console.log(url)
       fetch(url).
       then(res=>{
         if (res.ok) {

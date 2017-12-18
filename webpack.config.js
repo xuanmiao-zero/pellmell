@@ -39,7 +39,7 @@ module.exports = {
       },
       {
         test: /\.(jpg|png|gif|jpeg)/,
-        use: "file-loader"
+        loader: "file-loader?limit=8192&name=img/[hash:8].[name].[ext]"
       },
       {
         test: /\.svg$/,
@@ -61,6 +61,8 @@ module.exports = {
   ],
   devServer: {
     open: true,
+    // serve 的根目录
+    // contentBase: '/pellmell',
     port: 666,
     historyApiFallback: true
   },

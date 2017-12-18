@@ -23,7 +23,8 @@ export default class extends Component {
       navigationListShow,
       navigationLinkLevel0IsActive,
       mainMenuData,
-      changeNavigationLinkLevel0IsActive
+      changeNavigationLinkLevel0IsActive,
+      setIsOpen
     } = this.props
 
     return (
@@ -47,8 +48,12 @@ export default class extends Component {
                 className="navigation-item navigation-item--level0"
               >
                 {i ? <Link
+                  onClick={()=>{
+                    this.props.setIsOpen()
+                  }
+                  }
                   to={{
-                    pathname: e.name.toLowerCase().replace	(/\s/g, ''),
+                    pathname: e.name.toLowerCase().replace(/\s/g, ''),
                   }}
                   onMouseEnter={changeNavigationLinkLevel0IsActive.bind(this, i)}
                   className={`navigation-link navigation-link--level0 ${navigationLinkLevel0IsActive === i ? ' is-highlighted' : ' is-faded'}`}
@@ -110,7 +115,8 @@ export default class extends Component {
                               {...{
                                 e,
                                 i,
-                                navigationLinkLevel0IsActive
+                                navigationLinkLevel0IsActive,
+                                setIsOpen
                               }}
                             />
                           })
@@ -127,3 +133,4 @@ export default class extends Component {
     );
   }
 }
+

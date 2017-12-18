@@ -35,23 +35,23 @@ class Categories extends React.PureComponent {
 
   render() {
     let {WaterfallFlow: WaterfallFlowState, actions} = this.props
-    console.log(WaterfallFlowState)
-    console.log(WaterfallFlowState.isFetching)
+    // console.log(WaterfallFlowState)
+    // console.log(WaterfallFlowState.isFetching)
     return (
       <div className="page-container page-categories page--toppadding">
         <div className="page-header">
 
-            <FeedFilters
-              {...{
-                getWaterfallFlowData: actions.getWaterfallFlowData
-              }}
-            />
+          <FeedFilters
+            {...{
+              getWaterfallFlowData: actions.getWaterfallFlowData
+            }}
+          />
           <WaterfallFlow
-              {...{
-                WaterfallFlowState,
-                removeImageById: actions.removeImageById,
-              }}
-            />
+            {...{
+              WaterfallFlowState,
+              removeImageById: actions.removeImageById,
+            }}
+          />
         </div>
         <div className="feednav">
           <a
