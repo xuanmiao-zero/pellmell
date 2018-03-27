@@ -1,0 +1,16 @@
+暂缓功能：
+   划动切换轮播图
+  点击切换图片，圆圈归零动画
+  按需加载
+  用本地文件替换google font库
+  自动计算背景色
+  艺术家首页图片随机+根据情况改变图片大小
+
+问题
+切换一级菜单时,二级菜单会重置
+图片为加载失败报错信息清除
+PROBE_UNKNOWN未识别的reducer
+如何先让图片加载然后渲染
+整屏切换跳动的问题
+将promise 改为async和await
+将hashRouter改为BrowserRouter

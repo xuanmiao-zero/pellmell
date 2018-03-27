@@ -34,7 +34,6 @@ app.get('', (req, res) =>{
      api.search(req.query.keyword, options)
     .then(result => {      //result格式: { totalPages: 29, images: [] }
       res.send(result)
-      console.log(result)
     })
   }
 })
